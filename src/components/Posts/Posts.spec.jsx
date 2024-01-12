@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react'
 import { Posts } from '.'
 
 const props = {
@@ -20,9 +20,8 @@ const props = {
       title: 'title 3',
       body: 'body 3',
       cover: 'img/img3.png',
-    }
-
-  ]
+    },
+  ],
 }
 
 describe('<Posts />', () => {
@@ -33,16 +32,15 @@ describe('<Posts />', () => {
     expect(screen.getAllByRole('img', { name: /title/i })).toHaveLength(3)
     expect(screen.getAllByText(/body/i)).toHaveLength(3)
     expect(screen.getByRole('img', { name: /title 3/i })).toHaveAttribute('src', 'img/img3.png')
-  });
+  })
 
   it('should not render posts', () => {
-    render(<Posts />);
+    render(<Posts />)
     expect(screen.queryAllByRole('heading', { name: /title/i })).toHaveLength(0)
-  });
+  })
 
   it('should match snapshot', () => {
-    const { container } = render(<Posts {...props} />);
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(container.firstChild).toMatchSnapshot();
-  });
+    const { container } = render(<Posts {...props} />)
+    expect(container.firstChild).toMatchSnapshot()
+  })
 })
