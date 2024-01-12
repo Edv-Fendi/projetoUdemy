@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import { Button } from "."
 import userEvent from "@testing-library/user-event"
 
@@ -31,11 +31,18 @@ describe('<Button />', () => {
   })
 
   
-  it('should be disabled when disabled is false"', () => {
+  it('should be enabled when disabled is false"', () => {
     render(<Button text="load more" disabled={false} />)
 
     const button = screen.getByRole('button', { name: /load more/i })
 
     expect(button).toBeEnabled()
+  })
+
+  it('should match snapshot"', () => {
+    const fn = jest.fn()
+    const { container } =render(<Button text="load more" disabled={false} onClick={fn}/>)
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(container.firstChild).toMatchSnapshot()
   })
 })
