@@ -60,4 +60,18 @@ describe('<Home  />', () => {
     expect(screen.getByText('Nao existem posts')).toBeInTheDocument()
     debug()
   })
+  it('should load more posts', async () => {
+    const { debug } = render(<Home />)
+    const noMorePosts = screen.getByText('Nao existem posts')
+
+    // expect.assertions(3)
+    await waitForElementToBeRemoved(noMorePosts)
+
+    const button = screen.getByRole('button', { name: /load more posts/i })
+
+    userEvent.click(button)
+    expect(button).not.toBeDisabled()
+
+    debug()
+  })
 })
