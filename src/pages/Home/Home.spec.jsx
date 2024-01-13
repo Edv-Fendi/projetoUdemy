@@ -28,8 +28,6 @@ describe('<Home  />', () => {
     const { debug } = render(<Home />)
     const noMorePosts = screen.getByText('Nao existem posts')
 
-    // expect.assertions(3)
-
     await waitForElementToBeRemoved(noMorePosts)
 
     const search = screen.getByPlaceholderText(/type your search/i)
@@ -57,6 +55,9 @@ describe('<Home  />', () => {
       }),
     ).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'qui est esse 2' })).toBeInTheDocument()
+
+    userEvent.type(search, 'post does not exist')
+    expect(screen.getByText('Nao existem posts')).toBeInTheDocument()
     debug()
   })
 })
